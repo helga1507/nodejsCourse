@@ -1,65 +1,46 @@
 const fs = require('fs');
 
-const requestHandler = (req, res) => {
-  const url = req.url;
-  const method = req.method;
-
+const handlerRouting = (req, res) => {
+  const {url, method} = req;
   res.setHeader('Content-Type', 'text/html');
 
-  if (url === '/') {
-    res.write('<html>');
-    res.write('<head><title>Enter Message</title></head>');
-    res.write(`
-    <body>
-        <form action="/message" method="POST">
-            <input type="text" name="message">
-            <button type="submit">Send</button>
-        </form>
-    </body>`);
-    res.write('</html>');
+  if(url === '/users'){
+   return fs.readFile('users.html',  (err, users) => {
+      if (err) throw err;
 
-    return res.end();
+      res.write(users);
+
+      return res.end();
+    });
   }
-  else if (url === '/message' && method === 'POST') {
-    const body = [];
+  else if(url === '/create-user' && method === 'POST'){
+    const bodyReq = [];
 
-    req.on('data', chunk => body.push(chunk));
+    req.on('data', chunk => bodyReq.push(chunk));
 
     return req.on('end', () => {
-      const parserBody = Buffer.concat(body).toString();
-      const message = parserBody.split('=')[1];
+      const parseBody = Buffer.concat(bodyReq).toString().split('&');
 
-      fs.writeFile('message.txt', message, err => {
-        res.writeHead(302, {'Location': '/'});
-        // res.statusCode = 302;
-        // res.setHeader('Location', '/');
-        return res.end();
+      parseBody.forEach(item => {
+        const data = item.split('=');
+
+        console.log(data[0],data[1]);
       });
 
+      res.writeHead(302, {Location: '/users'});
 
+      return res.end();
     });
-
   }
 
-  // console.log('req', req.url,);
-  // console.log('req', req.method);
-  // console.log('req', req.headers);
+  fs.readFile('home.html',  (err, homePage) => {
+    if (err) throw err;
 
+    res.write(homePage);
 
-  res.write('<html>');
-  res.write('<head><title>My first page</title></head>');
-  res.write('<body><h1>Hello from me Node.js server</h1></body>');
-  res.write('</html>');
-  res.end();
+    return res.end();
+  });
+
 };
 
-// module.exports = requestHandler;
-
-//module.exports.handler = requestHandler;
-
-//exports.handler = requestHandler;
-
-
-module.exports = {
-  handler: requestHandler
-};
+module.exports = handlerRouting;
