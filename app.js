@@ -1,22 +1,21 @@
-const http = require('http');
 const express = require('express');
 
 const app = express();
 
-//use - add new middleware
-app.use((req, res, next) => {
-  console.log('in the middleware');
-
-  //allows the continue to the next middleware
-  next();
-});
-
-app.use((req, res, next) => {
+app.use('/add-product', (req, res, next) => {
   console.log('in the another middleware');
 
-  return res.end();
+
+  res.send('<h1>Products</h1>');
 });
 
-const server = http.createServer(app);
+//use - add new middleware
+//default content-type = text/html, charset = utf8
+app.use('/', (req, res, next) => {
+  console.log('in the another middleware');
 
-server.listen(3000);
+
+  res.send('<h1>Hello</h1>');
+});
+
+app.listen(3000);
