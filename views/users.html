@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/users.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="header__nav">
+            <ul class="header__nav-list">
+                <li class="header__nav-item"><a href="/">Home</a></li>
+                <li class="header__nav-item active"><a href="/admin/users">Users</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <h2 class="main__h1">Users List</h2>
+
+        <ul class="main__users-list">
+            <li class="main__users-item">Anna</li>
+            <li class="main__users-item">Maria</li>
+            <li class="main__users-item">John</li>
+        </ul>
+
+        <h2>New User</h2>
+
+        <form action="/admin/add-user" method="post" class="main__form">
+            <input type="text" name="name"  class="main__input">
+            <button type="submit" class="main__button">Add user</button>
+        </form>
+    </main>
+</body>
+</html>

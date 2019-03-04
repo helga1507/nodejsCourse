@@ -1,15 +1,27 @@
 {
-  "name": "first",
+  "name": "nodejscourse",
   "version": "1.0.0",
-  "description": "cours of nodes ",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helga1507/nodejsCourse.git"
+  },
   "author": "Olga Lashkul",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helga1507/nodejsCourse/issues"
+  },
+  "homepage": "https://github.com/helga1507/nodejsCourse#readme",
   "devDependencies": {
     "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
   }
 }
