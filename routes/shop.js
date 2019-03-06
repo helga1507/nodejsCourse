@@ -7,7 +7,14 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   //without .pug and folders (it was define in app.use)
-  res.render('shop', {prods: adminData.products, pageTitle: 'Shop', path: '/'});
+  res.render('shop', {
+    prods: adminData.products,
+    pageTitle: 'Shop',
+    path: '/',
+    hasProducts: Boolean(adminData.products.length),
+    activeShop: true,
+    productCSS: true
+  });
 });
 
 module.exports = router;

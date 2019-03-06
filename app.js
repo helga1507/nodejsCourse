@@ -1,13 +1,20 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const expressHbs = require('express-handlebars');
 const shopRoutes = require('./routes/shop');
 const adminData = require('./routes/admin');
 
 const app = express();
 
+app.engine('hbs', expressHbs({
+  layoutsDir: 'views/layouts',
+  defaultLayout: 'main-layout',
+  extname: 'hbs'
+}));
+
 //set templater
-app.set('view engine', 'pug');
+app.set('view engine', 'hbs');
 
 //can be other folder, not 'views'
 //folder with templates
@@ -21,7 +28,7 @@ app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res) => {
-  res.status(404).render('404',{pageTitle: 'Not Found'});
+  res.status(404).render('404', {pageTitle: 'Not Found'});
 });
 
 app.listen(3000);
