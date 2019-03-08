@@ -1,0 +1,17 @@
+.main__form{
+    display: grid;
+    grid-gap: 20px;
+    grid-template: auto / 200px 100px;
+}
+
+.main__input {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #b6daf7;
+}
+
+.main__button {
+    background-color: cornsilk;
+    border: 1px solid #ffeda6;
+    cursor: pointer;
+}
