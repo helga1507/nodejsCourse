@@ -1,20 +1,19 @@
 const path = require('path');
+
 const express = require('express');
-const rootDir = require('../util/path');
-const adminData = require('./admin');
+
+const shopController = require('../controllers/shop');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  //without .pug and folders (it was define in app.use)
-  res.render('shop', {
-    prods: adminData.products,
-    pageTitle: 'Shop',
-    path: '/',
-    hasProducts: Boolean(adminData.products.length),
-    activeShop: true,
-    productCSS: true
-  });
-});
+router.get('/', shopController.getIndex);
+
+router.get('/products', shopController.getProducts);
+
+router.get('/cart', shopController.getCart);
+
+router.get('/orders', shopController.getOrders);
+
+router.get('/checkout', shopController.getCheckout);
 
 module.exports = router;
